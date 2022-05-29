@@ -89,7 +89,7 @@ function App() {
       </div>
       
       <div style={{marginTop: "120px", marginLeft: "100px"}}>
-        <input type="text" placeholder='Enter number between 1 to 5' onInput={(e) => setValue(e.target.value)} />
+        <input type="number" placeholder='Enter number between 1 to 5' onInput={(e) => setValue(e.target.value)} />
         <button onClick={() => handleClick(value)}>Shoot</button>
       </div>
     </Container>
