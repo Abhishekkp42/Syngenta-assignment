@@ -33,6 +33,10 @@ function App() {
     }
   ]
 
+  const [data, setData] = useState(arr)
+
+  const [value, setValue] = useState(0)
+
 
   const Container = styled.div`
   display: flex;
@@ -47,21 +51,30 @@ function App() {
   margin-bottom: 30px;
   `
 
+  const handleClick = (id) => {
+    // e.preventDefault()
+    const change= data.map((el) => {
+      return el.id == id ? { ...el, status: !el.status } : el
+    })
+    setData(change)
+    console.log("Srr", arr)
+  }
+
   return (
     <div>
     <Container>
-      <div style={{marginTop: "120px", marginRight: "200px"}}>
+      <div style={{marginTop: "120px", marginRight: "200px", overflow: "scroll"}}>
         <p>Empty div</p>
         <div style={{border: "2px solid black", height: "350px", width: "300px"}}>
-        {arr.map((el) => {
+        {data.map((el) => {
           return el.status ? 
-          <Circle key={el.id} style={{backgroundColor:`${el.color}` }}></Circle>
+          <Circle key={el.id} style={{backgroundColor:`${el.color}` }} onClick={() => handleClick(el.id)}></Circle>
           : null
         })}
         </div>
       </div>
 
-      <div>
+      <div style={{justifyContent: "space-evenly"}}>
         {/* <p>Circles</p>
         <Circle style={{backgroundColor:"#d5e8d4" }} ></Circle>
         <Circle style={{backgroundColor:"#ffe6cd" }} ></Circle>
@@ -69,15 +82,15 @@ function App() {
         <Circle style={{backgroundColor:"#d9e8fb" }} ></Circle>
         <Circle style={{backgroundColor:"#e2d5e7" }} ></Circle> */}
 
-        {arr.map((el) => {
+        {data.map((el) => {
           return el.status ? null :
-          <Circle key={el.id} style={{backgroundColor:`${el.color}` }}></Circle>
+          <Circle key={el.id} style={{backgroundColor:`${el.color}` }} ></Circle>
         })}
       </div>
       
-      <div>
-        <input type="text" placeholder='Enter number between 1 to 5' />
-        <button>Shoot</button>
+      <div style={{marginTop: "120px", marginLeft: "100px"}}>
+        <input type="text" placeholder='Enter number between 1 to 5' onInput={(e) => setValue(e.target.value)} />
+        <button onClick={() => handleClick(value)}>Shoot</button>
       </div>
     </Container>
     </div>
